@@ -1,0 +1,22 @@
+{
+  "name": "flag-threejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ulascan54/flag-threejs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ulascan54/flag-threejs/issues"
+  },
+  "homepage": "https://github.com/ulascan54/flag-threejs#readme",
+  "dependencies": {
+    "three": "^0.132.2"
+  }
+}
