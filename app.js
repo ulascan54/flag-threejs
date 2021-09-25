@@ -1,22 +1,36 @@
 const container = document.getElementById('container')
 
-const scene = new THREE.Scene()
-const camera = new THREE.PerspectiveCamera(80,window.innerWidth / window.innerHeight,0.1,1000)
-camera.position.set(3,0,-3);
-camera.lookAt(0,0,0);
+var scene = new THREE.Scene()
+var camera = new THREE.PerspectiveCamera(80,window.innerWidth / window.innerHeight,0.1,1000)
 
-const  renderer = new THREE.WebGLRenderer()
+
+var  renderer = new THREE.WebGLRenderer({
+    alpha:true,
+    antialias:true
+})
 renderer.setSize(window.innerWidth,window.innerHeight)
 container.appendChild(renderer.domElement)
 
-const planeGeometry=new THREE.PlaneGeometry(5,3,5,3)
-const flagMat= new THREE.MeshBasicMaterial({color:'white',wireframe:true})
-const flag =new THREE.Mesh(planeGeometry,flagMat)
+var planeGeometry=new THREE.PlaneGeometry(5,3,200,120)
+var flagMat= new THREE.MeshBasicMaterial({color:'red', wireframe:true})
+var flag =new THREE.Mesh(planeGeometry,flagMat)
 
 scene.add(flag)
+flag.rotation.set(-0.1,0,0)
+
+camera.position.z=4;
+
+const clock= new THREE.Clock()
 
 function animate(){
-    renderer.render(scene,camera)
+    const time = clock.getElapsedTime()
+
+    flag.geometry.vertices.map(v=>{
+        v.z = 0.5 * Math.sin(v.x*2+time)
+    })
+    flag.geometry.verticesNeedUpdate=true
+
     requestAnimationFrame(animate)
+    renderer.render(scene,camera)
 }
 animate()
