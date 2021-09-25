@@ -1,14 +1,14 @@
 const container = document.getElementById('container')
 
 var scene = new THREE.Scene()
-var camera = new THREE.PerspectiveCamera(80,window.innerWidth / window.innerHeight,0.1,1000)
+var camera = new THREE.PerspectiveCamera(75,container.clientWidth / container.clientHeight,0.1,1000)
 const loader = new THREE.TextureLoader()
 
 var  renderer = new THREE.WebGLRenderer({
     alpha:true,
     antialias:true
 })
-renderer.setSize(window.innerWidth,window.innerHeight)
+renderer.setSize(container.clientWidth,container.clientHeight)
 container.appendChild(renderer.domElement)
 
 var planeGeometry=new THREE.PlaneGeometry(5,3,300,180)
@@ -39,3 +39,10 @@ function animate(){
     renderer.render(scene,camera)
 }
 animate()
+
+window.addEventListener('resize',()=>{
+    camera.aspect=container.clientWidth / container.clientHeight
+    camera.updateProjectionMatrix()
+    renderer.setSize(container.clientWidth,container.clientHeight)
+
+})
